@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include "interval.h"
 #include <QJSEngine>
 #include <QList>
 #include <QObject>
@@ -34,6 +35,11 @@ public:
     MediaManager(Session* session, QObject* parent = nullptr);
 
     static MediaManager* singletonInstance();
+
+    Q_INVOKABLE Interval createInterval(qint64 start, qint64 end)
+    {
+        return Interval(start, end);
+    };
 
     Session* session() { return m_session; };
 

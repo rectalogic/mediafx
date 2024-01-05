@@ -65,6 +65,7 @@ void MediaClip::setClipStart(qint64 ms)
     }
     m_clipStart = ms;
     emit clipStartChanged();
+    emit clipDurationChanged();
 }
 
 void MediaClip::setClipEnd(qint64 ms)
@@ -75,6 +76,7 @@ void MediaClip::setClipEnd(qint64 ms)
     }
     m_clipEnd = ms;
     emit clipEndChanged();
+    emit clipDurationChanged();
 }
 
 void MediaClip::render()

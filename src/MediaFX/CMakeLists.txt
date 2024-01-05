@@ -51,7 +51,17 @@ set_property(TARGET mediafxtool PROPERTY OUTPUT_NAME mediafx)
 qt_add_qml_module(mediafx
     URI MediaFX
     QML_FILES
+    qml/sequence.js
+    qml/MediaSequence.qml
     qml/MultiEffectState.qml
+    qml/effects/MediaMixer.qml
+    qml/effects/CrossFadeMixer.qml
+)
+qt_add_shaders(mediafx "shaders"
+    PREFIX
+    "/shaders"
+    FILES
+    qml/effects/crossfade.frag
 )
 
 target_link_libraries(mediafx PUBLIC PkgConfig::ffms2 Qt6::Core Qt6::Gui Qt6::GuiPrivate Qt6::Multimedia Qt6::Qml Qt6::Quick)

@@ -28,9 +28,9 @@ using namespace std::chrono;
 class Interval {
     Q_GADGET
     QML_VALUE_TYPE(interval)
-    QML_STRUCTURED_VALUE
     Q_PROPERTY(int start READ start FINAL)
     Q_PROPERTY(int end READ end FINAL)
+    Q_PROPERTY(int duration READ duration FINAL)
 
 public:
     constexpr Interval() noexcept = default;
@@ -51,6 +51,7 @@ public:
 
     constexpr qint64 start() const noexcept { return duration_cast<milliseconds>(s).count(); }
     constexpr qint64 end() const noexcept { return duration_cast<milliseconds>(e).count(); }
+    constexpr qint64 duration() const noexcept { return duration_cast<milliseconds>(e - s).count(); }
 
     Q_INVOKABLE constexpr bool contains(qint64 time) const noexcept
     {
