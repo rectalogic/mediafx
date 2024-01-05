@@ -68,19 +68,35 @@ Item {
                     source: root.video
                     dest: auxVideo
                     target: root.mediaMixers[currentMixerIndex]
-                    //XXX reset time to 0 when we use this mixer
-                    //XXX can we add the time driver here as a property change, set it to a binding that computes normalized time?
                 }
             }
         ]
 
         Component.onCompleted: {
+            function onClipEnded() {
+                if (currentClipIndex + 1 < root.mediaClips.length) {
+                    currentClipIndex += 1;
+                    initializeClip();
+                    state = "video";
+                }
+                currentMixerIndex = (currentMixerIndex + 1) % root.mediaMixers.length;
+                root.mediaMixers[currentMixerIndex].time = 0;
+            };
+            function onClipCurrentTimeChanged() {
+                var clip = root.mediaClips[currentClipIndex];
+                //XXX monitor for mixing time, unless beginning of first or end of last
+                //XXX set state "mixer" if in interval, and drive mixer time
+            };
+            function initializeClip() {
+                var clip = root.mediaClips[currentClipIndex];
+                //XXX compute and store mixing Interval (in private property), that can be checked in onClipCurrentTimeChanged
+                clip.onClipCurrentTimeChanged = onClipCurrentTimeChanged;
+                clip.onClipEnded = onClipEnded;
+            };
+            state = "video";
             //XXX hmm, I think we want to just start monitoring first clips time and clipEnded and when we hit our interval, then state change, and when it ends, state change again - and increment currentClipIndex
             //XXX but need to hook next clips clipEnded as soon as it starts, in case it finishes early (before mixer is done)
             //XXX or we could shorten the overlap based on each clips duration
-            for (var mediaClip in mediaClips) {
-
-            }
         }
     }
 }

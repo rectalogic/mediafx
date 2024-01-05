@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QDebugStateSaver>
+#include <QtQmlIntegration>
 #include <QtTypes>
 #include <chrono>
 #include <utility>
@@ -26,6 +27,8 @@ using namespace std::chrono;
 
 class Interval {
     Q_GADGET
+    QML_VALUE_TYPE(interval)
+    QML_STRUCTURED_VALUE
     Q_PROPERTY(int start READ start FINAL)
     Q_PROPERTY(int end READ end FINAL)
 
