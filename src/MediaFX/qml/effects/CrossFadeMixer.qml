@@ -17,5 +17,6 @@ import QtQuick
 import MediaFX
 
 MediaMixer {
+    //required source //XXX how to make this required for users of us?
     fragmentShader: "shaders/crossfade.frag.qsb"
 }

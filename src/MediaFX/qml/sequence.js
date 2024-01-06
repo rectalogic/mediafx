@@ -15,6 +15,9 @@
 
 function onClipEnded() {
     if (internal.currentClipIndex + 1 < root.mediaClips.length) {
+        var clip = root.mediaClips[internal.currentClipIndex];
+        clip.clipCurrentTimeChanged.disconnect(onClipCurrentTimeChanged);
+        clip.clipEnded.disconnect(onClipEnded);
         internal.currentClipIndex += 1;
         initializeClip();
     }
@@ -32,15 +35,16 @@ function onClipCurrentTimeChanged() {
 
 function initializeClip() {
     var clip = root.mediaClips[internal.currentClipIndex];
+    var mixer = root.mediaMixers[internal.currentMixerIndex];
     // Last clip
     if (internal.currentClipIndex >= root.mediaClips.length - 1) {
         clip.onClipEnded.connect(root.mediaSequenceEnded)
     }
     else {
-        var clampedMixDuration = Math.min(Math.min(root.mixDuration, clip.duration), root.mediaClips[internal.currentClipIndex + 1].duration);
+        var clampedMixDuration = Math.min(Math.min(mixer.duration, clip.duration), root.mediaClips[internal.currentClipIndex + 1].duration);
         internal.mixInterval = MediaManager.createInterval(clip.clipEnd - clampedMixDuration, clip.clipEnd);
-        clip.onClipCurrentTimeChanged = onClipCurrentTimeChanged;
-        clip.onClipEnded = onClipEnded;
+        clip.clipCurrentTimeChanged.connect(onClipCurrentTimeChanged);
+        clip.clipEnded.connect(onClipEnded);
     }
     internal.state = "video";
 };

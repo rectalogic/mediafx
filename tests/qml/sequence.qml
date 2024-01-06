@@ -14,10 +14,27 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 import QtQuick
+import QtQuick.Effects
+import QtMultimedia
+import MediaFX
 
-ShaderEffect {
-    property Item source
-    property Item dest
-    property real time: 0.0
-    property int duration: 1000
+Item {
+    MediaSequence {
+        id: sequence
+        anchors.fill: parent
+
+        MediaClip {
+            source: Qt.resolvedUrl("../fixtures/assets/blue-320x180-30fps-3s.nut")
+        }
+        MediaClip {
+            source: Qt.resolvedUrl("../fixtures/assets/red-320x180-15fps-8s.nut")
+        }
+
+        mediaMixers: [
+            CrossFadeMixer {}
+        ]
+        Component.onCompleted: {
+            sequence.mediaSequenceEnded.connect(MediaManager.finishEncoding);
+        }
+    }
 }

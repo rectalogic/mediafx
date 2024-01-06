@@ -18,13 +18,11 @@ import QtMultimedia
 import MediaFX
 import "sequence.js" as Sequence
 
-Item {
+VideoOutput {
     id: root
 
-    required default property VideoOutput videoOutput
-    required property list<MediaClip> mediaClips
+    required default property list<MediaClip> mediaClips
     required property list<MediaMixer> mediaMixers
-    property int mixDuration: 2500 //XXX ms duration of each mixer
 
     signal mediaSequenceEnded()
 
@@ -39,39 +37,39 @@ Item {
 
         VideoOutput {
             id: auxVideo
-            parent: root.videoOutput.parent
-            x: root.videoOutput.x
-            y: root.videoOutput.y
-            width: root.videoOutput.width
-            height: root.videoOutput.height
-            fillMode: root.videoOutput.fillMode
+            parent: root.parent
+            x: root.x
+            y: root.y
+            width: root.width
+            height: root.height
+            fillMode: root.fillMode
             visible: false
         }
         states: [
             State {
                 name: "video"
                 PropertyChanges {
-                    Media.clip: root.mediaClips[currentClipIndex]
-                    target: root.videoOutput
+                    Media.clip: root.mediaClips[internal.currentClipIndex]
+                    target: root
                 }
             },
             State {
                 name: "mixer"
                 PropertyChanges {
-                    Media.clip: root.mediaClips[currentClipIndex]
+                    Media.clip: root.mediaClips[internal.currentClipIndex]
                     layer.enabled: true
                     visible: false
-                    target: root.videoOutput
+                    target: root
                 }
                 PropertyChanges {
-                    Media.clip: (currentClipIndex + 1 >= root.mediaClips.length) ? null : root.mediaClips[currentClipIndex + 1]
+                    Media.clip: (internal.currentClipIndex + 1 >= root.mediaClips.length) ? null : root.mediaClips[internal.currentClipIndex + 1]
                     layer.enabled: true
                     target: auxVideo
                 }
                 PropertyChanges {
-                    source: root.videoOutput
+                    source: root
                     dest: auxVideo
-                    target: root.mediaMixers[currentMixerIndex]
+                    target: root.mediaMixers[internal.currentMixerIndex]
                 }
             }
         ]
