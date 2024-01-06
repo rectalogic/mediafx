@@ -28,6 +28,7 @@ Item {
         }
         MediaClip {
             source: Qt.resolvedUrl("../fixtures/assets/red-320x180-15fps-8s.nut")
+            clipEnd: 3000
         }
 
         mediaMixers: [

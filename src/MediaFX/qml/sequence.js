@@ -41,7 +41,7 @@ function initializeClip() {
         clip.onClipEnded.connect(root.mediaSequenceEnded)
     }
     else {
-        var clampedMixDuration = Math.min(Math.min(mixer.duration, clip.duration), root.mediaClips[internal.currentClipIndex + 1].duration);
+        var clampedMixDuration = Math.min(Math.min(mixer.duration, clip.clipDuration), root.mediaClips[internal.currentClipIndex + 1].clipDuration);
         internal.mixInterval = MediaManager.createInterval(clip.clipEnd - clampedMixDuration, clip.clipEnd);
         clip.clipCurrentTimeChanged.connect(onClipCurrentTimeChanged);
         clip.clipEnded.connect(onClipEnded);

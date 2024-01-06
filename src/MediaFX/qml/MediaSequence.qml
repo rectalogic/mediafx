@@ -52,6 +52,10 @@ VideoOutput {
                     Media.clip: root.mediaClips[internal.currentClipIndex]
                     target: root
                 }
+                PropertyChanges {
+                    visible: false
+                    target: root.mediaMixers[internal.currentMixerIndex]
+                }
             },
             State {
                 name: "mixer"
@@ -66,9 +70,18 @@ VideoOutput {
                     layer.enabled: true
                     target: auxVideo
                 }
+                ParentChange {
+                    parent: root.parent
+                    x: root.x
+                    y: root.y
+                    width: root.width
+                    height: root.height
+                    target: root.mediaMixers[internal.currentMixerIndex]
+                }
                 PropertyChanges {
                     source: root
                     dest: auxVideo
+                    visible: true
                     target: root.mediaMixers[internal.currentMixerIndex]
                 }
             }
