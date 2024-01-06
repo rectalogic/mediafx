@@ -29,7 +29,7 @@ function onClipCurrentTimeChanged() {
     var clip = root.mediaClips[internal.currentClipIndex];
     if (internal.mixInterval.contains(clip.clipCurrentTime.start)) {
         internal.state = "mixer";
-        root.mediaMixers[internal.currentMixerIndex].time = internal.mixInterval.duration / (clip.clipCurrentTime.start - internal.mixInterval.start);
+        root.mediaMixers[internal.currentMixerIndex].time = (clip.clipCurrentTime.start - internal.mixInterval.start) / internal.mixInterval.duration;
     }
 };
 
