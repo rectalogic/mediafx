@@ -27,7 +27,7 @@ function onClipEnded() {
 
 function onClipCurrentTimeChanged() {
     var clip = root.mediaClips[internal.currentClipIndex];
-    if (internal.mixInterval.contains(clip.clipCurrentTime)) {
+    if (internal.mixInterval.contains(clip.clipCurrentTime.start)) {
         internal.state = "mixer";
         root.mediaMixers[internal.currentMixerIndex].time = internal.mixInterval.duration / (clip.clipCurrentTime.start - internal.mixInterval.start);
     }
