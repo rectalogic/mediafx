@@ -15,6 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "application.h"
 #include "encoder.h"
 #ifdef EVENTLOGGER
 #include "event_logger.h"
@@ -28,12 +29,6 @@
 #include <QStringLiteral>
 #include <QUrl>
 
-#ifdef WEBENGINEQUICK
-#include <QtWebEngineQuick>
-#endif
-
-#define qSL QStringLiteral
-
 const auto ffmpegPreamble = qSL("-f rawvideo -video_size ${MEDIAFX_FRAMESIZE} -pixel_format rgb0 -framerate ${MEDIAFX_FRAMERATE} -i pipe:${MEDIAFX_VIDEOFD}");
 
 int main(int argc, char* argv[])
@@ -43,15 +38,7 @@ int main(int argc, char* argv[])
         const_cast<char*>("QT_MAC_DISABLE_FOREGROUND_APPLICATION_TRANSFORM=1"));
 #endif
 
-#ifdef WEBENGINEQUICK
-#if !defined(QT_NO_OPENGL)
-    // https://doc.qt.io/qt-6/qml-qtwebengine-webengineview.html#rendering-to-opengl-surface
-    // https://doc.qt.io/qt-6/qtwebengine-overview.html#embedding-web-content-into-qt-quick-applications
-    QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
-#endif
-    QtWebEngineQuick::initialize();
-#endif
-
+    initializeMediaFX();
     QGuiApplication app(argc, argv);
 
 #ifdef EVENTLOGGER

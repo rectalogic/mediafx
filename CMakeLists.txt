@@ -20,6 +20,7 @@ project(mediaFX VERSION 1.0.0 LANGUAGES CXX)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Multimedia Qml Quick ShaderTools QUIET OPTIONAL_COMPONENTS Quick3D WebEngineQuick)
 
 qt_standard_project_setup()
+qt_policy(SET QTP0001 NEW)
 enable_testing(true)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -38,3 +39,4 @@ endif()
 
 add_subdirectory(src/MediaFX)
 add_subdirectory(tests)
+add_subdirectory(tools/viewer)

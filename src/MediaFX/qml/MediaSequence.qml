@@ -63,14 +63,11 @@ VideoOutput {
                     target: auxVideo
                 }
                 ParentChange {
-                    height: root.height
                     parent: root.parent
                     target: root.mediaMixers[internal.currentMixerIndex]
-                    width: root.width
-                    x: root.x
-                    y: root.y
                 }
                 PropertyChanges {
+                    anchors.fill: root
                     dest: auxVideo
                     source: root
                     target: root.mediaMixers[internal.currentMixerIndex]
