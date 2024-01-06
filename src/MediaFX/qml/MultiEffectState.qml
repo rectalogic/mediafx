@@ -16,7 +16,6 @@
 import QtQuick
 import QtQuick.Effects
 import QtMultimedia
-import MediaFX
 
 State {
     default required property MultiEffect effect
