@@ -24,8 +24,8 @@ State {
     Component.onCompleted: effect.visible = false
 
     ParentChange {
-        target: effect
         parent: videoOutput.parent
+        target: effect
     }
     PropertyChanges {
         anchors.fill: videoOutput

@@ -33,6 +33,7 @@ Item {
         Media.clip: videoClip
         anchors.fill: parent
         layer.enabled: false
+
         // layer.samplerName: "source"
 
         layer.effect: ShaderEffect {

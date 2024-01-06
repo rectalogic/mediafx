@@ -21,21 +21,24 @@ import MediaFX
 Item {
     MediaSequence {
         id: sequence
+
         anchors.fill: parent
+
+        mediaMixers: [
+            CrossFadeMixer {
+            }
+        ]
+
+        Component.onCompleted: {
+            sequence.mediaSequenceEnded.connect(MediaManager.finishEncoding);
+        }
 
         MediaClip {
             source: Qt.resolvedUrl("../fixtures/assets/blue-320x180-30fps-3s.nut")
         }
         MediaClip {
-            source: Qt.resolvedUrl("../fixtures/assets/red-320x180-15fps-8s.nut")
             clipEnd: 3000
-        }
-
-        mediaMixers: [
-            CrossFadeMixer {}
-        ]
-        Component.onCompleted: {
-            sequence.mediaSequenceEnded.connect(MediaManager.finishEncoding);
+            source: Qt.resolvedUrl("../fixtures/assets/red-320x180-15fps-8s.nut")
         }
     }
 }

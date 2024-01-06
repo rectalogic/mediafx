@@ -21,10 +21,10 @@ import "sequence.js" as Sequence
 VideoOutput {
     id: root
 
-    required default property list<MediaClip> mediaClips
+    default required property list<MediaClip> mediaClips
     required property list<MediaMixer> mediaMixers
 
-    signal mediaSequenceEnded()
+    signal mediaSequenceEnded
 
     Item {
         id: internal
@@ -35,35 +35,27 @@ VideoOutput {
 
         anchors.fill: parent
 
-        VideoOutput {
-            id: auxVideo
-            parent: root.parent
-            x: root.x
-            y: root.y
-            width: root.width
-            height: root.height
-            fillMode: root.fillMode
-            visible: false
-        }
         states: [
             State {
                 name: "video"
+
                 PropertyChanges {
                     Media.clip: root.mediaClips[internal.currentClipIndex]
                     target: root
                 }
                 PropertyChanges {
-                    visible: false
                     target: root.mediaMixers[internal.currentMixerIndex]
+                    visible: false
                 }
             },
             State {
                 name: "mixer"
+
                 PropertyChanges {
                     Media.clip: root.mediaClips[internal.currentClipIndex]
                     layer.enabled: true
-                    visible: false
                     target: root
+                    visible: false
                 }
                 PropertyChanges {
                     Media.clip: (internal.currentClipIndex + 1 >= root.mediaClips.length) ? null : root.mediaClips[internal.currentClipIndex + 1]
@@ -71,22 +63,34 @@ VideoOutput {
                     target: auxVideo
                 }
                 ParentChange {
+                    height: root.height
                     parent: root.parent
+                    target: root.mediaMixers[internal.currentMixerIndex]
+                    width: root.width
                     x: root.x
                     y: root.y
-                    width: root.width
-                    height: root.height
-                    target: root.mediaMixers[internal.currentMixerIndex]
                 }
                 PropertyChanges {
-                    source: root
                     dest: auxVideo
-                    visible: true
+                    source: root
                     target: root.mediaMixers[internal.currentMixerIndex]
+                    visible: true
                 }
             }
         ]
 
         Component.onCompleted: Sequence.initializeClip()
+
+        VideoOutput {
+            id: auxVideo
+
+            fillMode: root.fillMode
+            height: root.height
+            parent: root.parent
+            visible: false
+            width: root.width
+            x: root.x
+            y: root.y
+        }
     }
 }
