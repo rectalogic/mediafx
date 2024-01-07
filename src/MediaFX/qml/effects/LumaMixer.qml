@@ -21,7 +21,7 @@ MediaMixer {
 
     default required property Item luma
     property real transitionWidth: root.width
-    readonly property real timeMulTransitionWidthPlusOne: root.time * transitionWidth + 1.0
+    readonly property real premultipliedTransitionWidth: root.time * transitionWidth + 1.0
 
     fragmentShader: "qrc:/shaders/qml/effects/luma.frag.qsb"
     state: "default"
@@ -34,13 +34,11 @@ MediaMixer {
             target: root.luma
         }
         PropertyChanges {
-            height: root.height
+            x: root.x; y: root.y;
+            width: root.width; height: root.height;
             layer.enabled: true
-            target: root.luma
             visible: false
-            width: root.width
-            x: root.x
-            y: root.y
+            target: root.luma
         }
     }
 }

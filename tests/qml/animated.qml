@@ -23,8 +23,7 @@ Item {
         name: "reanchored"
 
         AnchorChanges {
-            anchors.bottom: container.bottom
-            anchors.right: container.right
+            anchors: { bottom: container.bottom; right: container.right; }
             target: rect
         }
     }
@@ -44,8 +43,7 @@ Item {
     Rectangle {
         id: rect
 
+        width: 50; height: 50;
         color: "red"
-        height: 50
-        width: 50
     }
 }

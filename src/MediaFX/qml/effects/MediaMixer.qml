@@ -16,8 +16,8 @@
 import QtQuick
 
 ShaderEffect {
+    property Item source
     property Item dest
     property int duration: 1000
-    property Item source
     property real time: 0.0
 }

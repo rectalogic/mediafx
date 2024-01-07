@@ -30,11 +30,11 @@ State {
     PropertyChanges {
         anchors.fill: videoOutput
         source: videoOutput
-        target: effect
         visible: true
+        target: effect
     }
     PropertyChanges {
-        target: videoOutput
         visible: false
+        target: videoOutput
     }
 }

@@ -31,8 +31,8 @@ Item {
     VideoOutput {
         id: videoOutput
 
-        Media.clip: videoClip
         anchors.fill: parent
+        Media.clip: videoClip
 
         states: MultiEffectState {
             name: "filter"

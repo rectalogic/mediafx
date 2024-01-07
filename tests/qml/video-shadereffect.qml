@@ -30,8 +30,8 @@ Item {
     VideoOutput {
         id: videoOutput
 
-        Media.clip: videoClip
         anchors.fill: parent
+        Media.clip: videoClip
         layer.enabled: false
 
         // layer.samplerName: "source"
