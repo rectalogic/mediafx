@@ -23,7 +23,8 @@ Item {
         name: "reanchored"
 
         AnchorChanges {
-            anchors: { bottom: container.bottom; right: container.right; }
+            anchors.bottom: container.bottom
+            anchors.right: container.right
             target: rect
         }
     }

@@ -14,28 +14,16 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 import QtQuick
-import QtQuick.Effects
 import QtMultimedia
 
 State {
     id: root
-    default required property MultiEffect effect
     required property VideoOutput videoOutput
+    default required property Component effect
 
-    Component.onCompleted: root.effect.visible = false
-
-    ParentChange {
-        parent: root.videoOutput.parent
-        target: root.effect
-    }
-    PropertyChanges {
-        anchors.fill: root.videoOutput
-        source: root.videoOutput
-        visible: true
-        target: root.effect
-    }
-    PropertyChanges {
-        visible: false
+    PropertyChanges {        
+        layer.enabled: true
+        layer.effect: root.effect
         target: root.videoOutput
     }
 }

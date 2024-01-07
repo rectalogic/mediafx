@@ -27,26 +27,21 @@ Item {
             videoClip.clipEnded.connect(MediaManager.finishEncoding);
         }
     }
+
     VideoOutput {
         id: videoOutput
 
         anchors.fill: parent
         Media.clip: videoClip
-        layer.enabled: false
 
-        // layer.samplerName: "source"
-
-        layer.effect: ShaderEffect {
-            fragmentShader: "grayscale.frag.qsb"
-        }
-        states: State {
+        states: ShaderEffectState {
             name: "filter"
             // From 1-2 sec into the video, switch to greyscale
             when: (videoClip.clipCurrentTime.containedBy(1000, 2000))
 
-            PropertyChanges {
-                layer.enabled: true
-                target: videoOutput
+            videoOutput: videoOutput
+            ShaderEffect {
+                fragmentShader: "grayscale.frag.qsb"
             }
         }
     }

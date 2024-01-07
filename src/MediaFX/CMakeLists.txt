@@ -53,6 +53,7 @@ qt_add_qml_module(mediafx
     qml/sequence.js
     qml/MediaSequence.qml
     qml/MultiEffectState.qml
+    qml/ShaderEffectState.qml
     qml/effects/MediaMixer.qml
     qml/effects/CrossFadeMixer.qml
     qml/effects/LumaMixer.qml
