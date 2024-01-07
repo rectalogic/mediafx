@@ -19,6 +19,8 @@ layout(std140, binding = 0) uniform buf {
     mat4 qt_Matrix;
     float qt_Opacity;
     float time;
+    float transitionWidth;
+    float timeMulTransitionWidthPlusOne;
 };
 layout(binding = 1) uniform sampler2D source;
 layout(binding = 2) uniform sampler2D dest;
@@ -27,10 +29,19 @@ void main() {
     vec4 sp = texture(source, qt_TexCoord0);
     vec4 dp = texture(dest, qt_TexCoord0);
     vec4 lp = texture(luma, qt_TexCoord0);
-    vec4 m = clamp((lp * time), vec4(0.0), vec4(1.0));
+    
+
+    vec4 m = clamp((lp * vec4(transitionWidth) - vec4(transitionWidth)) + vec4(timeMulTransitionWidthPlusOne), vec4(0.0), vec4(1.0));
     fragColor = mix(sp, dp, m) * qt_Opacity;
-    fragColor = vec4(lp.rgb, 1.0);
-    fragColor = vec4(mix(sp.rgb, dp.rgb, m.rgb), 1.0) * qt_Opacity;
+
+
+/*
+    float m = clamp((lp.r * transitionWidth - transitionWidth) + (timeMulTransitionWidthPlusOne), 0.0, 1.0);
+    fragColor = mix(sp, dp, m) * qt_Opacity;
+*/
+
+    //fragColor = vec4(lp.rgb, 1.0);
+    //fragColor = vec4(mix(sp.rgb, dp.rgb, m.rgb), 1.0) * qt_Opacity;
     //fragColor = vec4(1.0, 0.0, 0.0, 1.0);
 
 /*XXX

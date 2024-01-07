@@ -47,6 +47,7 @@ int main(int argc, char* argv[])
     QUrl url(args.at(0));
 
     QQuickView quickView(url);
+    quickView.setResizeMode(QQuickView::ResizeMode::SizeRootObjectToView);
     // qCritical() << quickView.errors();
     quickView.show();
 

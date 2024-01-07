@@ -20,6 +20,8 @@ MediaMixer {
     id: root
 
     default required property Item luma
+    property real transitionWidth: root.width
+    readonly property real timeMulTransitionWidthPlusOne: root.time * transitionWidth + 1.0
 
     fragmentShader: "qrc:/shaders/qml/effects/luma.frag.qsb"
     state: "default"

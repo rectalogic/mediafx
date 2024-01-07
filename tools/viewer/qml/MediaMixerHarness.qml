@@ -7,7 +7,7 @@ import MediaFX
 Item {
     id: root
 
-    default property alias mixer: mixerContainer.children
+    default property alias mixer: mixerContainer.data
 
     height: 400
     state: "default"
