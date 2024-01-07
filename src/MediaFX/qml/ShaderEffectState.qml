@@ -21,7 +21,7 @@ State {
     required property VideoOutput videoOutput
     default required property Component effect
 
-    PropertyChanges {        
+    PropertyChanges {
         layer.enabled: true
         layer.effect: root.effect
         target: root.videoOutput

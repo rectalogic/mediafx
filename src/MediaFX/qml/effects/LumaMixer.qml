@@ -34,8 +34,10 @@ MediaMixer {
             target: root.luma
         }
         PropertyChanges {
-            x: root.x; y: root.y;
-            width: root.width; height: root.height;
+            x: root.x
+            y: root.y
+            width: root.width
+            height: root.height
             layer.enabled: true
             visible: false
             target: root.luma

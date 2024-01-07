@@ -44,7 +44,8 @@ Item {
     Rectangle {
         id: rect
 
-        width: 50; height: 50;
+        width: 50
+        height: 50
         color: "red"
     }
 }
