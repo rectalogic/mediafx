@@ -2,6 +2,8 @@
 # Copyright (C) 2023 Andrew Wason
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+set -o pipefail
+
 usage="$0 <mediafxpath> <framerate>:<WxH> <qml-file> <output-file> <threshold>"
 
 BASE=${BASH_SOURCE%/*}

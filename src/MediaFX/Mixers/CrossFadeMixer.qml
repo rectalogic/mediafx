@@ -9,5 +9,13 @@ import MediaFX
     \brief Fades out the source video as it fades in the destination video.
 */
 MediaMixer {
-    fragmentShader: "qrc:/shaders/crossfade.frag.qsb"
+    id: root
+
+    MediaMixerShaderEffect {
+        source: root.source
+        dest: root.dest
+        time: root.time
+        fragmentShader: "qrc:/shaders/crossfade.frag.qsb"
+        anchors.fill: parent
+    }
 }

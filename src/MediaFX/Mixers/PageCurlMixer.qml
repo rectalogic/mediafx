@@ -13,5 +13,11 @@ import MediaFX
 MediaMixer {
     id: root
 
-    fragmentShader: "qrc:/shaders/pageCurl.frag.qsb"
+    MediaMixerShaderEffect {
+        source: root.source
+        dest: root.dest
+        time: root.time
+        fragmentShader: "qrc:/shaders/pageCurl.frag.qsb"
+        anchors.fill: parent
+    }
 }

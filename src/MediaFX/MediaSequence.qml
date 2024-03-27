@@ -67,13 +67,10 @@ Item {
 
                 PropertyChanges {
                     mediaClip: root.mediaClips[internal.currentClipIndex]
-                    layer.enabled: true
-                    visible: false
                     target: video
                 }
                 PropertyChanges {
                     mediaClip: (internal.currentClipIndex + 1 >= root.mediaClips.length) ? null : root.mediaClips[internal.currentClipIndex + 1]
-                    layer.enabled: true
                     target: auxVideo
                 }
                 ParentChange {
@@ -94,15 +91,12 @@ Item {
 
         VideoRenderer {
             id: video
-
-            anchors.fill: internal
         }
         VideoRenderer {
             id: auxVideo
 
             fillMode: video.fillMode
             orientation: video.orientation
-            anchors.fill: internal
             visible: false
         }
     }

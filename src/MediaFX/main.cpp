@@ -46,11 +46,13 @@ int main(int argc, char* argv[])
     app.setOrganizationDomain(u"mediafx.org"_s);
     app.setOrganizationName(u"MediaFX"_s);
     app.setApplicationName(u"MediaFX"_s);
+    app.setApplicationVersion(MediaFXVersion);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(u"MediaFX\nCopyright (C) 2023-2024 Andrew Wason\nSPDX-License-Identifier: GPL-3.0-or-later\nVersion: %1"_s.arg(MediaFXVersion));
     parser.setSingleDashWordOptionMode(QCommandLineParser::ParseAsLongOptions);
     parser.addHelpOption();
+    parser.addVersionOption();
     parser.addOption({ { u"f"_s, u"fps"_s }, u"Output frames per second, can be integer or rational e.g. 30000/1001."_s, u"fps"_s, u"30"_s });
     parser.addOption({ { u"r"_s, u"sampleRate"_s }, u"Output audio sample rate (Hz)"_s, u"sampleRate"_s, u"44100"_s });
     parser.addOption({ { u"s"_s, u"size"_s }, u"Output video frame size, WxH."_s, u"size"_s, u"640x360"_s });

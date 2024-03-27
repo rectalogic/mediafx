@@ -26,6 +26,8 @@ MediaSequence {
             blindsEffect: 0.05
         },
         PageCurlMixer {
+        },
+        Demo3DMediaMixer {
         }
     ]
 
@@ -53,6 +55,11 @@ MediaSequence {
     MediaClip {
         endTime: 3000
         source: Qt.resolvedUrl("../fixtures/assets/edjustforyou-320x180-15fps-5.2s-44100.nut")
+        audioRenderer: AudioRenderer {
+        }
+    }
+    MediaClip {
+        source: Qt.resolvedUrl("../fixtures/assets/edquestions-320x180-15fps-2.4s-44100.nut")
         audioRenderer: AudioRenderer {
         }
     }

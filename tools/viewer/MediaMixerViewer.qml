@@ -5,12 +5,13 @@ import QtQuick.Shapes
 import QtQuick.Layouts
 import QtQuick.Controls
 import MediaFX
+import MediaFX.Mixers
 
 Item {
     id: root
 
     default property alias data: mixerContainer.data
-    required property Item mixer
+    required property MediaMixer mixer
 
     implicitHeight: 400
     implicitWidth: 400
@@ -19,14 +20,21 @@ Item {
     states: State {
         name: "default"
 
+        ParentChange {
+            parent: mixerContainer
+            target: root.mixer
+        }
         PropertyChanges {
             dest: destItem
             source: sourceItem
-            time: time.value
+            time: timeSlider.value
             visible: true
+            anchors.fill: mixerContainer
             target: root.mixer
         }
     }
+
+    Component.onCompleted: MediaManager.window.color = MediaManager.window.palette.window
 
     ColumnLayout {
         anchors.fill: parent
@@ -38,21 +46,22 @@ Item {
             Layout.fillWidth: true
         }
         Slider {
-            id: time
+            id: timeSlider
 
             Layout.fillWidth: true
             from: 0
             to: 1
             value: 0.5
         }
+        Button {
+            text: "Dump"
+            onClicked: root.mixer.dumpItemTree()
+        }
     }
     Rectangle {
         id: sourceItem
 
-        anchors.fill: parent
         color: "lightblue"
-        layer.enabled: true
-        visible: false
 
         Shape {
             anchors.fill: parent
@@ -73,14 +82,9 @@ Item {
     Rectangle {
         id: destItem
 
-        anchors.fill: parent
         color: "yellow"
-        layer.enabled: true
-        visible: false
 
         Shape {
-            id: qt
-
             anchors.fill: parent
 
             ShapePath {

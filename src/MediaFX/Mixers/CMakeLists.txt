@@ -22,6 +22,7 @@ qt_add_qml_module(mixers
     URI MediaFX.Mixers
     QML_FILES
     MediaMixer.qml
+    MediaMixerShaderEffect.qml
     CrossFadeMixer.qml
     LumaMixer.qml
     LumaGradientMixer.qml
